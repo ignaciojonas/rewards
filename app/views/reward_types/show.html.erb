@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reward_type %>
+
+<div>
+  <%= link_to "Edit this reward type", edit_reward_type_path(@reward_type) %> |
+  <%= link_to "Back to reward types", reward_types_path %>
+
+  <%= button_to "Destroy this reward type", @reward_type, method: :delete %>
+</div>

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Reward types" %>
+
+<h1>Reward types</h1>
+
+<div id="reward_types">
+  <% @reward_types.each do |reward_type| %>
+    <%= render reward_type %>
+    <p>
+      <%= link_to "Show this reward type", reward_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New reward type", new_reward_type_path %>

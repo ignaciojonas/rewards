@@ -1,0 +1,36 @@
+<%= form_with(model: reward) do |form| %>
+  <% if reward.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reward.errors.count, "error") %> prohibited this reward from being saved:</h2>
+
+      <ul>
+        <% reward.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :recipient, style: "display: block" %>
+    <%= form.text_field :recipient %>
+  </div>
+
+  <div>
+    <% RewardType.all.each do |reward_type| %>
+      <div>
+        <%= form.radio_button :reward_type_id, reward_type.id %>
+        <%= reward_type.name %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :amount, style: "display: block" %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
