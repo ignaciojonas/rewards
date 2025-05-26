@@ -8,12 +8,12 @@
   <table id="rewards">
     <thead>
       <tr>
-        <th>Recipient</th>
-        <th>Reward Type</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Sent At</th>
-        <th>Delivery Times</th>
+        <th><%= link_to 'Recipient', rewards_path(sort: 'recipient', direction: params[:direction] == 'asc' && params[:sort] == 'recipient' ? 'desc' : 'asc') %></th>
+        <th><%= link_to 'Reward Type', rewards_path(sort: 'reward_type_id', direction: params[:direction] == 'asc' && params[:sort] == 'reward_type_id' ? 'desc' : 'asc') %></th>
+        <th><%= link_to 'Amount', rewards_path(sort: 'amount', direction: params[:direction] == 'asc' && params[:sort] == 'amount' ? 'desc' : 'asc') %></th>
+        <th><%= link_to 'Status', rewards_path(sort: 'status', direction: params[:direction] == 'asc' && params[:sort] == 'status' ? 'desc' : 'asc') %></th>
+        <th><%= link_to 'Sent At', rewards_path(sort: 'sent_at', direction: params[:direction] == 'asc' && params[:sort] == 'sent_at' ? 'desc' : 'asc') %></th>
+        <th><%= link_to 'Delivery Times', rewards_path(sort: 'delivery_times', direction: params[:direction] == 'asc' && params[:sort] == 'delivery_times' ? 'desc' : 'asc') %></th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,9 @@
   </table>
   <%= paginate @rewards %>
 </div>
-
-<%= turbo_frame_tag "new_reward" do %>
-  <%= render "form", reward: Reward.new %>
-<% end %>
+<div style="margin-top: 2em; padding: 1.5em; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc;">
+  <h2 style="margin-top: 0;">Create New Reward</h2>
+  <%= turbo_frame_tag "new_reward" do %>
+    <%= render "form", reward: Reward.new %>
+  <% end %>
+</div>

@@ -3,7 +3,7 @@ class RewardsController < ApplicationController
 
   # GET /rewards or /rewards.json
   def index
-     @rewards = Reward.order(created_at: :desc).page(params[:page]).per(5)
+     @rewards = Reward.order("#{sort_column} #{sort_direction}").page(params[:page]).per(5)
   end
 
   # GET /rewards/1 or /rewards/1.json
@@ -76,5 +76,14 @@ class RewardsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reward_params
       params.expect(reward: [ :recipient, :reward_type_id, :amount ])
+    end
+
+    def sort_column
+      # List of allowed columns to sort by
+      %w[recipient reward_type_id amount status sent_at delivery_times].include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end
