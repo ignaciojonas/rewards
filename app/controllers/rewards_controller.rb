@@ -27,9 +27,19 @@ class RewardsController < ApplicationController
       if @reward.save
         format.html { redirect_to @reward, notice: "Reward was successfully created." }
         format.json { render :show, status: :created, location: @reward }
+        format.turbo_stream do
+          render turbo_stream: 
+          [
+            turbo_stream.append("rewards", partial: "rewards/reward", locals: { reward: @reward }),
+            turbo_stream.replace("new_reward", partial: "rewards/form", locals: { reward: Reward.new })
+        ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reward.errors, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("new_reward", partial: "rewards/form", locals: { reward: @reward })
+        end
       end
     end
   end

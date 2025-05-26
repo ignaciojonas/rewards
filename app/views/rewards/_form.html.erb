@@ -1,19 +1,10 @@
 <%= form_with(model: reward) do |form| %>
-  <% if reward.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(reward.errors.count, "error") %> prohibited this reward from being saved:</h2>
-
-      <ul>
-        <% reward.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div>
     <%= form.label :recipient, style: "display: block" %>
     <%= form.text_field :recipient %>
+    <% if reward.errors[:recipient].any? %>
+      <div style="color: red"><%= reward.errors[:recipient].join(', ') %></div>
+    <% end %>
   </div>
 
   <div>
@@ -23,11 +14,17 @@
         <%= reward_type.name %>
       </div>
     <% end %>
+    <% if reward.errors[:reward_type].any? %>
+      <div style="color: red"><%= reward.errors[:reward_type].join(', ') %></div>
+    <% end %>
   </div>
 
   <div>
     <%= form.label :amount, style: "display: block" %>
     <%= form.text_field :amount %>
+    <% if reward.errors[:amount].any? %>
+      <div style="color: red"><%= reward.errors[:amount].join(', ') %></div>
+    <% end %>
   </div>
 
   <div>

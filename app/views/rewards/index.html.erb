@@ -4,13 +4,26 @@
 
 <h1>Rewards</h1>
 
-<div id="rewards">
-  <% @rewards.each do |reward| %>
-    <%= render reward %>
-    <p>
-      <%= link_to "Show this reward", reward %>
-    </p>
-  <% end %>
+<div>
+  <table id="rewards">
+    <thead>
+      <tr>
+        <th>Recipient</th>
+        <th>Reward Type</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Sent At</th>
+        <th>Delivery Times</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rewards.each do |reward| %>
+        <%= render reward %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New reward", new_reward_path %>
+<%= turbo_frame_tag "new_reward" do %>
+  <%= render "form", reward: Reward.new %>
+<% end %>
