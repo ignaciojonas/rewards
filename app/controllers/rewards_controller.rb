@@ -3,7 +3,7 @@ class RewardsController < ApplicationController
 
   # GET /rewards or /rewards.json
   def index
-    @rewards = Reward.all
+     @rewards = Reward.order(created_at: :desc).page(params[:page]).per(5)
   end
 
   # GET /rewards/1 or /rewards/1.json
